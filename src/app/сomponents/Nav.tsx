@@ -26,6 +26,7 @@ export default function Nav() {
       {item("/", "Главная")}
       {item("/search", "Поиск")}
       {item("/products", "Продукты")}
+      {item("/messages", "Сообщения")}
     </nav>
   );
 }
