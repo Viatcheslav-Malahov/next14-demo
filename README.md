@@ -15,13 +15,13 @@
 ---
 
 ## 📂 Структура проекта
-src/
-app/
-layout.tsx # Общий макет, навигация через next/link
-page.tsx # Главная страница (Server Component)
-search/
-page.tsx # Страница поиска (Client Component)
-components/
-ClientSearch.tsx # Поиск с useTransition + useDeferredValue
-styles/
-globals.css # Tailwind v4 (@import "tailwindcss")
+- src/
+- app/
+- layout.tsx # Общий макет, навигация через next/link
+- page.tsx # Главная страница (Server Component)
+- search/
+- page.tsx # Страница поиска (Client Component)
+- components/
+- ClientSearch.tsx # Поиск с useTransition + useDeferredValue
+- styles/
+- globals.css # Tailwind v4 (@import "tailwindcss")
