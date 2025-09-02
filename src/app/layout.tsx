@@ -1,5 +1,5 @@
 import "./globals.css";
-import Link from "next/link";
+import Nav from "@/app/сomponents/Nav";
 
 export const metadata = {
   title: "Next.js 14 — App Router Demo",
@@ -16,20 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="text-gray-600">
               Server Components, Client Components, Tailwind v4
             </p>
-            <nav className="mt-4 flex gap-3 text-sm">
-              <Link
-                className="rounded-lg border px-3 py-1.5 hover:bg-white"
-                href="/"
-              >
-                Главная
-              </Link>
-              <Link
-                className="rounded-lg border px-3 py-1.5 hover:bg-white"
-                href="/search"
-              >
-                Поиск (client)
-              </Link>
-            </nav>
+            <Nav />
           </header>
           {children}
           <footer className="mt-12 text-sm text-gray-500">
