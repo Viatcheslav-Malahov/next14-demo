@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 type Product = {
     id: number;
@@ -38,12 +39,12 @@ export default async function ProductPage(props: {
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-10 space-y-6">
-            <a
+            <Link
                 href="/products"
                 className="inline-block text-sm text-gray-600 hover:underline"
             >
                 ← Назад к списку
-            </a>
+            </Link>
 
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
                 <div className="text-sm text-gray-500">
