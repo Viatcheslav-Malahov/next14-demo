@@ -1,5 +1,4 @@
 import "./globals.css";
-import Nav from "@/app/сomponents/Nav";
 
 export const metadata = {
   title: "Next.js 14 — App Router Demo",
@@ -16,7 +15,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <p className="text-gray-600">
               Server Components, Client Components, Tailwind v4
             </p>
-            <Nav />
           </header>
           {children}
           <footer className="mt-12 text-sm text-gray-500">
