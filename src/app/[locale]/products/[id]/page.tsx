@@ -1,6 +1,8 @@
-import { notFound } from "next/navigation";
-import Image from "next/image";
+import { getDictionary } from "@/i18n";
+import type { Locale } from "@/i18n/locales";
 import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
 type Product = {
     id: number;
@@ -31,19 +33,21 @@ async function getProduct(id: string): Promise<Product | null> {
 }
 
 export default async function ProductPage(props: {
-    params: Promise<{ id: string }>;
+    params: Promise<{ locale: string; id: string }>;
 }) {
-    const { id } = await props.params; // 👈 дожидаемся params
+    const { locale, id } = await props.params;
+    const t = await getDictionary(locale as Locale);
+
     const product = await getProduct(id);
     if (!product) notFound();
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-10 space-y-6">
             <Link
-                href="/products"
+                href={`/${locale}/products`}
                 className="inline-block text-sm text-gray-600 hover:underline"
             >
-                ← Назад к списку
+                {t.products.back}
             </Link>
 
             <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">

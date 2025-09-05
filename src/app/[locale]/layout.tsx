@@ -4,6 +4,7 @@ import LanguageSwitch from "./LanguageSwitch";
 import Nav from "@/app/сomponents/Nav";
 import { getDictionary } from "@/i18n";
 
+
 export default async function LocaleLayout(props: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -20,8 +21,7 @@ export default async function LocaleLayout(props: {
             {t.app.title.replace("{locale}", locale)}
           </h1>
           <p className="text-gray-600">{t.app.subtitle}</p>
-          <Nav locale={locale as Locale} />
-        </div>
+          <Nav locale={locale as Locale} labels={t.app.nav} />        </div>
         <LanguageSwitch current={locale as Locale} />
       </header>
       {props.children}

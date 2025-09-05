@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { revalidateProducts } from "./revalidate";
+import { getDictionary } from "@/i18n";
+import type { Locale } from "@/i18n/locales";
 
 type Product = { id: number; title: string; price: number };
 
@@ -18,15 +20,21 @@ async function getProducts(): Promise<Product[]> {
 
 export const metadata = { title: "Products (cached + tag)" };
 
-export default async function ProductsPage() {
+export default async function ProductsPage(props: {
+    params: Promise<{ locale: string }>;
+}) {
+    const { locale } = await props.params;
+    const t = await getDictionary(locale as Locale);
+
     const products = await getProducts();
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-10 space-y-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold">Продукты</h2>
+                <h2 className="text-xl font-semibold">{t.products.listHeading}</h2>
                 <form action={revalidateProducts}>
                     <button className="rounded-lg border px-3 py-1.5 text-sm hover:bg-white">
+                        {/** Можно локализовать при желании */}
                         Обновить
                     </button>
                 </form>

@@ -1,11 +1,17 @@
 // src/app/[locale]/components/Nav.tsx
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Locale } from "@/i18n/locales";
 
-export default function Nav({ locale }: { locale: Locale }) {
+type Labels = {
+  home: string;
+  search: string;
+  products: string;
+  messages: string;
+};
+
+export default function Nav({ locale, labels }: { locale: Locale; labels: Labels }) {
   const pathname = usePathname();
   const href = (p: string) => `/${locale}${p}`;
   const isActive = (p: string) => pathname === href(p);
@@ -23,10 +29,10 @@ export default function Nav({ locale }: { locale: Locale }) {
 
   return (
     <nav className="mt-4 flex gap-3">
-      {item("/", "Главная")}
-      {item("/search", "Поиск")}
-      {item("/products", "Продукты")}
-      {item("/messages", "Сообщения")}
+      {item("/", labels.home)}
+      {item("/search", labels.search)}
+      {item("/products", labels.products)}
+      {item("/messages", labels.messages)}
     </nav>
   );
 }

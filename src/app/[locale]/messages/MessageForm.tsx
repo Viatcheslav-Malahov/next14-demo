@@ -1,10 +1,23 @@
 "use client";
-
 import { useOptimistic, useRef } from "react";
 import type { Message } from "./actions";
 import { addMessage } from "./actions";
 
 export default function MessageForm({ initial }: { initial: Message[] }) {
+    // добавим локальные строки через data-атрибуты или пропсы при желании,
+    // но проще — возьмём их из DOM? Лучше пробросить пропсы:
+    return <MessageFormInner initial={initial} placeholder="..." send="..." />;
+}
+
+function MessageFormInner({
+    initial,
+    placeholder,
+    send,
+}: {
+    initial: Message[];
+    placeholder: string;
+    send: string;
+}) {
     const [optimistic, addOptimistic] = useOptimistic(
         initial,
         (state: Message[], optimisticText: string) => [
@@ -12,17 +25,14 @@ export default function MessageForm({ initial }: { initial: Message[] }) {
             ...state,
         ]
     );
-
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
     async function action(formData: FormData) {
         const text = String(formData.get("text") || "").trim();
         if (!text) return;
-
         addOptimistic(text);
         await addMessage(formData);
-
         if (inputRef.current) inputRef.current.value = "";
         formRef.current?.reset();
     }
@@ -33,10 +43,10 @@ export default function MessageForm({ initial }: { initial: Message[] }) {
                 <input
                     ref={inputRef}
                     name="text"
-                    placeholder="Напиши сообщение…"
+                    placeholder={placeholder}
                     className="rounded-xl border px-3 py-2 flex-1"
                 />
-                <button className="rounded-xl border px-3 py-2">Отправить</button>
+                <button className="rounded-xl border px-3 py-2">{send}</button>
             </form>
 
             <ul className="space-y-2">
