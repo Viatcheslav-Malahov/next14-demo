@@ -5,11 +5,9 @@ import type { Message } from "./actions";
 import { addMessage } from "./actions";
 
 export default function MessageForm({ initial }: { initial: Message[] }) {
-    // Локальный optimistic-стейт поверх начального списка
     const [optimistic, addOptimistic] = useOptimistic(
         initial,
         (state: Message[], optimisticText: string) => [
-            // рисуем «фейковую» запись мгновенно
             { id: state.length + 1, text: optimisticText, createdAt: Date.now() },
             ...state,
         ]
@@ -22,13 +20,9 @@ export default function MessageForm({ initial }: { initial: Message[] }) {
         const text = String(formData.get("text") || "").trim();
         if (!text) return;
 
-        // 1) мгновенно показываем в UI
         addOptimistic(text);
-
-        // 2) отправляем на сервер
         await addMessage(formData);
 
-        // 3) чистим поле/форму (после успешной отправки)
         if (inputRef.current) inputRef.current.value = "";
         formRef.current?.reset();
     }

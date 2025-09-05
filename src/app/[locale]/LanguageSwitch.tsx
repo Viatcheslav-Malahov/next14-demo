@@ -5,10 +5,10 @@ import { switchLocale } from "./actions";
 import { LOCALES, type Locale } from "@/i18n/locales";
 
 export default function LanguageSwitch({ current }: { current: Locale }) {
-    const pathname = usePathname();              // напр.: /ru/products/5
-    const parts = pathname.split("/");           // ["", "ru", "products", "5"]
-    const rest = parts.slice(2).join("/");       // "products/5" или ""
-    const next = rest ? `/${rest}` : "/";        // хвост пути без локали
+    const pathname = usePathname();        // напр.: /ru/products/5
+    const parts = pathname.split("/");     // ["", "ru", "products", "5"]
+    const rest = parts.slice(2).join("/"); // "products/5" или ""
+    const next = rest ? `/${rest}` : "/";  // хвост пути без локали
 
     return (
         <div className="inline-flex items-center gap-2">
