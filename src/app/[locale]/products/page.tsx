@@ -2,6 +2,7 @@ import Link from "next/link";
 import { revalidateProducts } from "./revalidate";
 import { getDictionary } from "@/i18n";
 import type { Locale } from "@/i18n/locales";
+import { formatCurrency } from "@/i18n/format";
 
 type Product = { id: number; title: string; price: number };
 
@@ -34,7 +35,6 @@ export default async function ProductsPage(props: {
                 <h2 className="text-xl font-semibold">{t.products.listHeading}</h2>
                 <form action={revalidateProducts}>
                     <button className="rounded-lg border px-3 py-1.5 text-sm hover:bg-white">
-                        {/** Можно локализовать при желании */}
                         Обновить
                     </button>
                 </form>
@@ -44,12 +44,14 @@ export default async function ProductsPage(props: {
                 {products.map((p) => (
                     <Link
                         key={p.id}
-                        href={`/products/${p.id}`}
+                        href={`/${locale}/products/${p.id}`}
                         className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow transition"
                     >
                         <div className="text-sm text-gray-500">#{p.id}</div>
                         <div className="mt-1 text-lg font-medium">{p.title}</div>
-                        <div className="mt-2 text-gray-700">${p.price}</div>
+                        <div className="mt-2 text-gray-700">
+                            {formatCurrency(locale as Locale, p.price)}
+                        </div>
                     </Link>
                 ))}
             </div>

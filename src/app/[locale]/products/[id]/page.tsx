@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/locales";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { formatCurrency } from "@/i18n/format";
 
 type Product = {
     id: number;
@@ -55,7 +56,9 @@ export default async function ProductPage(props: {
                     #{product.id} · {product.brand}
                 </div>
                 <h1 className="mt-1 text-2xl font-semibold">{product.title}</h1>
-                <div className="mt-2 text-xl">${product.price}</div>
+                <div className="mt-2 text-xl">
+                    {formatCurrency(locale as Locale, product.price)}
+                </div>
 
                 {product.thumbnail && (
                     <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl border">

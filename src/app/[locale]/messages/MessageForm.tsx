@@ -2,22 +2,10 @@
 import { useOptimistic, useRef } from "react";
 import type { Message } from "./actions";
 import { addMessage } from "./actions";
+import { formatTime } from "@/i18n/format";
+import type { Locale } from "@/i18n/locales";
 
-export default function MessageForm({ initial }: { initial: Message[] }) {
-    // добавим локальные строки через data-атрибуты или пропсы при желании,
-    // но проще — возьмём их из DOM? Лучше пробросить пропсы:
-    return <MessageFormInner initial={initial} placeholder="..." send="..." />;
-}
-
-function MessageFormInner({
-    initial,
-    placeholder,
-    send,
-}: {
-    initial: Message[];
-    placeholder: string;
-    send: string;
-}) {
+export default function MessageForm({ initial, locale }: { initial: Message[]; locale: Locale }) {
     const [optimistic, addOptimistic] = useOptimistic(
         initial,
         (state: Message[], optimisticText: string) => [
@@ -25,6 +13,7 @@ function MessageFormInner({
             ...state,
         ]
     );
+
     const formRef = useRef<HTMLFormElement>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,10 +32,10 @@ function MessageFormInner({
                 <input
                     ref={inputRef}
                     name="text"
-                    placeholder={placeholder}
+                    placeholder="Напиши сообщение…"
                     className="rounded-xl border px-3 py-2 flex-1"
                 />
-                <button className="rounded-xl border px-3 py-2">{send}</button>
+                <button className="rounded-xl border px-3 py-2">Отправить</button>
             </form>
 
             <ul className="space-y-2">
@@ -57,7 +46,7 @@ function MessageFormInner({
                     >
                         {m.text}
                         <span className="ml-2 text-xs text-gray-500">
-                            {new Date(m.createdAt).toLocaleTimeString()}
+                            {formatTime(locale, m.createdAt)}
                         </span>
                     </li>
                 ))}
