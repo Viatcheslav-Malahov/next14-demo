@@ -1,1 +1,88 @@
 @import "tailwindcss";
+
+/* === Solarized palettes ===
+Light: base3 #fdf6e3, base2 #eee8d5, base1 #93a1a1, base0 #839496,
+       base00 #657b83, base01 #586e75, base02 #073642, base03 #002b36
+Accents: yellow #b58900, orange #cb4b16, red #dc322f, magenta #d33682,
+         violet #6c71c4, blue #268bd2, cyan #2aa198, green #859900
+*/
+
+/* Fallback */
+:root {
+    --bg: #fdf6e3;
+    --text: #073642;
+    --muted: #586e75;
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --accent: #268bd2;
+    /* blue */
+    --accent-contrast: #ffffff;
+}
+
+/* Светлая тема */
+:root[data-theme="light"] {
+    --bg: #fdf6e3;
+    /* base3 */
+    --text: #073642;
+    /* base02 */
+    --muted: #586e75;
+    /* base01 */
+    --card: #ffffff;
+    --border: #e5e7eb;
+    --accent: #268bd2;
+    /* blue */
+    --accent-contrast: #ffffff;
+}
+
+/* Тёмная тема */
+:root[data-theme="dark"] {
+    --bg: #002b36;
+    /* base03 */
+    --text: #93a1a1;
+    /* base1 */
+    --muted: #839496;
+    /* base0 */
+    --card: #073642;
+    /* base02 */
+    --border: #0b3947;
+    --accent: #2aa198;
+    /* cyan */
+    --accent-contrast: #001a21;
+}
+
+/* Базовое применение */
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Небольшие утилиты */
+.s-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+}
+
+.s-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+}
+
+.s-btn:hover {
+    background: var(--card);
+}
+
+.s-btn-accent {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    border: 1px solid transparent;
+}
+
+.s-btn-accent:hover {
+    opacity: .95;
+}
+
+/* Плавное переключение темы (приятнее глазу) */
+* {
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}

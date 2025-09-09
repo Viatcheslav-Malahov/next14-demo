@@ -46,13 +46,14 @@ export default async function ProductPage(props: {
         <main className="mx-auto max-w-3xl px-4 py-10 space-y-6">
             <Link
                 href={`/${locale}/products`}
-                className="inline-block text-sm text-gray-600 hover:underline"
+                className="inline-block text-sm hover:underline"
+                style={{ color: "var(--muted)" }}
             >
                 {t.products.back}
             </Link>
 
-            <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
-                <div className="text-sm text-gray-500">
+            <div className="rounded-2xl s-card p-6 shadow-sm">
+                <div className="text-sm" style={{ color: "var(--muted)" }}>
                     #{product.id} · {product.brand}
                 </div>
                 <h1 className="mt-1 text-2xl font-semibold">{product.title}</h1>
@@ -61,7 +62,7 @@ export default async function ProductPage(props: {
                 </div>
 
                 {product.thumbnail && (
-                    <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl border">
+                    <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden rounded-xl border" style={{ borderColor: "var(--border)" }}>
                         <Image
                             src={product.thumbnail}
                             alt={product.title}
@@ -74,9 +75,12 @@ export default async function ProductPage(props: {
                 )}
 
                 {product.description && (
-                    <p className="mt-4 text-gray-700">{product.description}</p>
+                    <p className="mt-4" style={{ color: "var(--muted)" }}>
+                        {product.description}
+                    </p>
                 )}
             </div>
         </main>
     );
+
 }

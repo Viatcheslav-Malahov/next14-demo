@@ -2,12 +2,12 @@
 import { useDeferredValue, useMemo, useState, useTransition } from "react";
 import { motion } from "framer-motion";
 
-export default function ClientSearchTexts({
-    placeholder,
-    pending,
+export default function ClientSearch({
+    placeholder = "Введите запрос…",
+    pending = "обновление…",
 }: {
-    placeholder: string;
-    pending: string;
+    placeholder?: string;
+    pending?: string;
 }) {
     const [query, setQuery] = useState("");
     const [isPending, startTransition] = useTransition();
@@ -25,13 +25,14 @@ export default function ClientSearchTexts({
         <div className="space-y-4">
             <div className="relative">
                 <input
-                    className="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 shadow-sm outline-none focus:border-gray-300"
+                    className="w-full rounded-2xl border px-4 py-3 shadow-sm outline-none focus:border-gray-300"
+                    style={{ borderColor: "var(--border)", background: "var(--card)", color: "var(--text)" }}
                     placeholder={placeholder}
                     value={query}
                     onChange={(e) => startTransition(() => setQuery(e.target.value))}
                 />
                 {isPending && (
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 text-sm" style={{ color: "var(--muted)" }}>
                         {pending}
                     </div>
                 )}
@@ -43,7 +44,7 @@ export default function ClientSearchTexts({
                         key={x}
                         initial={{ opacity: 0, y: 6 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="rounded-xl border border-gray-200 bg-white p-3"
+                        className="rounded-xl s-card p-3"
                     >
                         {x}
                     </motion.div>

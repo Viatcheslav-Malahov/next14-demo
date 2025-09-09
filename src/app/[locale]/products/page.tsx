@@ -34,7 +34,7 @@ export default async function ProductsPage(props: {
             <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold">{t.products.listHeading}</h2>
                 <form action={revalidateProducts}>
-                    <button className="rounded-lg border px-3 py-1.5 text-sm hover:bg-white">
+                    <button className="s-btn rounded-lg px-3 py-1.5 text-sm">
                         Обновить
                     </button>
                 </form>
@@ -45,11 +45,11 @@ export default async function ProductsPage(props: {
                     <Link
                         key={p.id}
                         href={`/${locale}/products/${p.id}`}
-                        className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm hover:shadow transition"
+                        className="rounded-2xl s-card p-5 shadow-sm hover:shadow transition"
                     >
-                        <div className="text-sm text-gray-500">#{p.id}</div>
+                        <div className="text-sm" style={{ color: "var(--muted)" }}>#{p.id}</div>
                         <div className="mt-1 text-lg font-medium">{p.title}</div>
-                        <div className="mt-2 text-gray-700">
+                        <div className="mt-2" style={{ color: "var(--muted)" }}>
                             {formatCurrency(locale as Locale, p.price)}
                         </div>
                     </Link>
